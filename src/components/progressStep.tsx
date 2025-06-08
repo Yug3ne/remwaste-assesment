@@ -20,11 +20,13 @@ const steps = [
 
 const ProgressStep = () => {
   return (
-    <div className={cn("bg-card border-b transition-colors duration-300 w-full")}>
+    <div
+      className={cn("bg-card border-b transition-colors duration-300 w-full")}
+    >
       <div className="px-2 sm:px-6 lg:px-8 py-6 w-full">
         <div
           className={cn(
-            "flex items-center justify-between overflow-x-auto whitespace-nowrap",
+            "flex items-center justify-start overflow-x-auto whitespace-nowrap",
             "scrollbar-hide" // this class will hide the scrollbar
           )}
         >
@@ -35,7 +37,7 @@ const ProgressStep = () => {
                 <div className="flex items-center">
                   <div
                     className={cn(
-                      "w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200",
+                      "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200",
                       step.completed && "bg-green-500 text-white shadow-lg",
                       step.current &&
                         !step.completed &&
@@ -67,7 +69,7 @@ const ProgressStep = () => {
                 {index < steps.length - 1 && (
                   <div
                     className={cn(
-                      "w-8 sm:w-16 h-0.5 mx-3 sm:mx-4 transition-all duration-200",
+                      "w-6 sm:w-12 md:w-16 h-0.5 mx-2 sm:mx-4 transition-all duration-200",
                       step.completed && "bg-green-500",
                       !step.completed && "bg-muted"
                     )}

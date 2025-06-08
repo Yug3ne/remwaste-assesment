@@ -1,14 +1,35 @@
+import { useState } from "react";
 import Navbar from "./components/navbar";
 import ProgressStep from "./components/progressStep";
-import SkipCard from "./components/skipCard";
 import { cn } from "./lib/utils";
+import type { Skip } from "./lib/types";
+import { fetchSkipsByLocation } from "./lib/api";
+import SkipGrid from "./components/SkipGrid";
+import SkipCardSkeleton from "./components/skipCardSkeleton";
+import { useQuery } from "@tanstack/react-query";
 
 function App() {
+  const [selectedSkip, setSelectedSkip] = useState<Skip | null>(null);
+
+  const {
+    data: skips,
+    error,
+    isLoading,
+    isFetching,
+  } = useQuery<Skip[], Error>({
+    queryKey: ["skips", "NR32", "Lowestoft"],
+    queryFn: () => fetchSkipsByLocation("NR32", "Lowestoft"),
+  });
+
+  const handleSkipSelect = (skip: Skip) => {
+    setSelectedSkip(skip);
+  };
+
   return (
-    <main className="flex flex-col gap-4 px-4 md:px-8 lg:px-16 xl:px-32 ">
+    <main className="flex flex-col gap-4 px-4 md:px-8 lg:px-16 xl:px-32">
       <Navbar />
       <ProgressStep />
-      <section className="max-w-7xl mx-auto ">
+      <section className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2
             className={cn(
@@ -27,38 +48,61 @@ function App() {
           </p>
         </div>
 
-        {/* grid of cards with skips */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-        </div>
+        {error && (
+          <div className="text-red-500 text-center mb-8">{error.message}</div>
+        )}
 
-        {/* skip summarry */}
-        <div
-          className={cn(
-            "rounded-xl shadow-lg border-2 p-6 mb-8",
-            "bg-card text-card-foreground border-border"
-          )}
-        >
-          <h3 className="text-lg font-semibold mb-4">Your Selection</h3>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">6 Yard Skip</p>
-              <p className={cn("text-sm", "text-muted-foreground")}>
-                Up to 14 days hire
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold text-primary">£220.00</p>
-              <p className={cn("text-sm", "text-muted-foreground")}>
-                including VAT
-              </p>
-            </div>
+        {(isLoading || isFetching) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkipCardSkeleton key={i} />
+            ))}
           </div>
-        </div>
+        )}
+
+        {!isLoading && !isFetching && skips && (
+          <SkipGrid
+            skips={skips}
+            selectedSkip={selectedSkip}
+            onSkipSelect={handleSkipSelect}
+          />
+        )}
+
+        {selectedSkip && (
+          <div
+            className={cn(
+              "rounded-xl shadow-lg border-2 p-6 mb-8",
+              "bg-card text-card-foreground border-border"
+            )}
+          >
+            <h3 className="text-lg font-semibold mb-4">Your Selection</h3>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">{selectedSkip.size} Yard Skip</p>
+                <p className={cn("text-sm", "text-muted-foreground")}>
+                  Up to {selectedSkip.hire_period_days} days hire
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold text-primary">
+                  £
+                  {(
+                    selectedSkip.price_before_vat *
+                    (1 + selectedSkip.vat / 100)
+                  ).toFixed(2)}
+                </p>
+                <p className={cn("text-sm", "text-muted-foreground")}>
+                  including VAT
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-4 italic">
+              Imagery and information shown throughout this website may not
+              reflect the exact shape or size specification, colours may vary,
+              options and/or accessories may be featured at additional cost.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );
