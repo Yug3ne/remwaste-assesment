@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { ArrowLeft, ArrowRight, Check, Clock } from "lucide-react";
+import {  ArrowRight, Clock } from "lucide-react";
 import { Button } from "./ui/button";
 
 const skip = {
