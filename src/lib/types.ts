@@ -1,3 +1,4 @@
+
 export interface Skip {
   id: number;
   size: number;
@@ -14,6 +15,7 @@ export interface Skip {
   allowed_on_road: boolean;
   allows_heavy_waste: boolean;
 }
+
 
 export interface SkipResponse {
   data: Skip[];

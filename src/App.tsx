@@ -8,9 +8,22 @@ import SkipGrid from "./components/SkipGrid";
 import SkipCardSkeleton from "./components/skipCardSkeleton";
 import { useQuery } from "@tanstack/react-query";
 
+
 function App() {
+  /**
+   * State to keep track of the currently selected skip.
+   * It is initialized to null, meaning no skip is selected initially.
+   */
   const [selectedSkip, setSelectedSkip] = useState<Skip | null>(null);
 
+  /**
+   * useQuery hook from TanStack Query to fetch skip data.
+   * - queryKey: A unique key for this query. It includes the location to ensure
+   *             the query is re-fetched if the location changes.
+   * - queryFn: The function that performs the data fetching.
+   *
+   * The hook returns the fetched data, error state, and loading states.
+   */
   const {
     data: skips,
     error,
@@ -26,7 +39,7 @@ function App() {
   };
 
   return (
-    <main className="flex flex-col gap-4 px-4 md:px-8 lg:px-16 xl:px-32">
+    <main className="flex flex-col gap-4 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
       <Navbar />
       <ProgressStep />
       <section className="max-w-7xl mx-auto">

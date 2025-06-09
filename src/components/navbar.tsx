@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "./modeToggle";
 import { MapPin, Truck } from "lucide-react";
 
+
 const Navbar = () => {
   return (
     <nav className="h-16 flex items-center justify-between">
@@ -13,7 +14,7 @@ const Navbar = () => {
             "w-10 h-10 bg-primary rounded-lg flex items-center justify-center"
           )}
         >
-          <Truck size={20} color="white"/>
+          <Truck size={20} color="white" />
         </div>
         <div>
           <p className={cn("font-bold text-foreground text-lg")}>

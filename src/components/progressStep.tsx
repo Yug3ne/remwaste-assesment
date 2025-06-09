@@ -18,6 +18,10 @@ const steps = [
   { id: 6, name: "Payment", upcoming: true, icon: CreditCard },
 ];
 
+/**
+ * A component to display the progress of a multi-step process (e.g., a checkout flow).
+ * It shows completed, current, and upcoming steps with icons and labels.
+ */
 const ProgressStep = () => {
   return (
     <div
@@ -26,8 +30,7 @@ const ProgressStep = () => {
       <div className="px-2 sm:px-6 lg:px-8 py-6 w-full">
         <div
           className={cn(
-            "flex items-center justify-start overflow-x-auto whitespace-nowrap",
-            "scrollbar-hide" // this class will hide the scrollbar
+            "flex items-center justify-start overflow-x-auto whitespace-nowrap pb-4"
           )}
         >
           {steps.map((step, index) => {

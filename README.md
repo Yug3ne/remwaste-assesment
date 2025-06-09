@@ -1,54 +1,41 @@
-# React + TypeScript + Vite
+# Remwaste Assessment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern web application built with a focus on a great developer experience and a robust, maintainable codebase.
 
-Currently, two official plugins are available:
+## Core Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is built upon a foundation of modern web technologies to ensure a high-quality user and developer experience.
 
-## Expanding the ESLint configuration
+- **[React](https://react.dev/):** A JavaScript library for building user interfaces. We chose React for its component-based architecture, which allows us to create reusable UI elements and manage application state effectively.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **[Vite](https://vitejs.dev/):** A next-generation frontend tooling. Vite provides an extremely fast development server with Hot Module Replacement (HMR) and an optimized build process, which significantly speeds up development and improves performance.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **[TypeScript](https://www.typescriptlang.org/):** A statically typed superset of JavaScript. TypeScript helps in writing more robust and maintainable code by catching errors during development and improving code clarity.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Styling
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The user interface is styled using a combination of utility-first CSS and a curated component library.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework that allows for rapid UI development without writing custom CSS. It's highly customizable and helps in maintaining a consistent design system.
+
+- **[shadcn/ui](https://ui.shadcn.com/):** A collection of beautifully designed, accessible, and reusable UI components. It's not a component library but a set of components that can be copied into the project and customized. This gives us full control over the components.
+
+- **[Lucide React](https://lucide.dev/):** A simply beautiful and consistent icon set.
+
+### Dark Theme
+
+This application includes a dark theme implementation using `shadcn/ui`. The theme can be toggled between light, dark, and system modes. The `ThemeProvider` context, located in `src/lib/context/ThemeContext.tsx`, manages the theme state and persists it to local storage.
+
+
+## Data Fetching
+
+We use a combination of a powerful server-state library and a promise-based HTTP client for data fetching.
+
+- **[TanStack React Query](https://tanstack.com/query/latest):** A powerful library for fetching, caching, and managing server state in React applications. It simplifies data fetching logic, handles caching, and provides a great developer experience with features like automatic refetching.
+
+- **[Axios](https://axios-http.com/):** A promise-based HTTP client for the browser and Node.js. It makes it easy to send asynchronous HTTP requests to REST endpoints.
+
+## Development Tools
+
+- **[ESLint](https://eslint.org/):** A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript and TypeScript. It helps in maintaining code quality and enforcing coding standards.
+

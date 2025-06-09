@@ -5,13 +5,27 @@ import { ArrowRight, Clock, Slash, Weight } from "lucide-react";
 import { Button } from "./ui/button";
 import type { Skip } from "@/lib/types";
 
+/**
+ * Props for the SkipCard component.
+ */
 interface SkipCardProps {
+  /** The skip object to display. */
   skip: Skip;
+  /** A callback function to be called when the skip is selected. */
   onSelect?: (skip: Skip) => void;
+  /** Indicates if the skip is currently selected. */
   isSelected?: boolean;
 }
 
+/**
+ * A component to display the details of a single skip in a card format.
+ * It shows the skip's size, price, hire period, and other attributes.
+ * It also handles the selection of the skip.
+ */
 const SkipCard = ({ skip, onSelect, isSelected }: SkipCardProps) => {
+  /**
+   * Calculates the final price including VAT.
+   */
   const finalPrice = skip.price_before_vat * (1 + skip.vat / 100);
 
   const formatPrice = (price: number) => {
@@ -80,7 +94,6 @@ const SkipCard = ({ skip, onSelect, isSelected }: SkipCardProps) => {
                 £{formatPrice(finalPrice)}
               </div>
               <div className="text-right">
-             
                 <div className="text-sm text-muted-foreground">
                   (£{formatPrice(skip.price_before_vat)} ex. VAT)
                 </div>
